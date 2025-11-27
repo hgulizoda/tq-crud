@@ -85,7 +85,7 @@ export default function PostDetail() {
   }
 
   return (
-    <Container size="md" py="xl" mt="90px">
+    <Container size="md" py="xl" mt="90px" mih="70vh">
       <Card
         shadow="md"
         p="lg"
