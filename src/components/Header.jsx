@@ -18,16 +18,15 @@ import {
   IconLogout,
 } from "@tabler/icons-react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { logIn, logOut } from "../store/slices/authSlice";
+
+import { NavLink, useNavigate } from "react-router-dom";
+import useAuthStore from "../store/slices/useAuthStore";
 
 export default function FancyHeader() {
   const [opened, setOpened] = useState(false);
-  const auth = useSelector((state) => state.auth.auth);
-  console.log(auth);
 
-  const dispatch = useDispatch();
+  const { auth, user, logOut } = useAuthStore();
+  const navigate = useNavigate();
   return (
     <AppShell header={{ height: 70 }} padding="md">
       <AppShell.Header>
@@ -60,6 +59,7 @@ export default function FancyHeader() {
               {auth ? (
                 <>
                   <Menu width={180} position="bottom-end">
+                    {user.username}
                     <Menu.Target>
                       <UnstyledButton>
                         <Group gap={6}>
@@ -78,7 +78,7 @@ export default function FancyHeader() {
                       </Menu.Item>
                       <Menu.Divider />
                       <Menu.Item
-                        onClick={() => dispatch(logOut())}
+                        onClick={() => logOut()}
                         color="red"
                         leftSection={<IconLogout size={16} />}
                       >
@@ -95,7 +95,7 @@ export default function FancyHeader() {
                   />
                 </>
               ) : (
-                <Button onClick={() => dispatch(logIn())}>Log in</Button>
+                <Button onClick={() => navigate("/")}>Log in</Button>
               )}
             </Group>
           </Group>

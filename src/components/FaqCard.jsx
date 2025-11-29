@@ -10,14 +10,14 @@ import {
   TextInput,
   Textarea,
 } from "@mantine/core";
-import { useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import API from "../api/API";
+import { API } from "../api/API";
 import { useQueryClient } from "@tanstack/react-query";
+import useAuthStore from "../store/slices/useAuthStore";
 
 export default function FAQCard({ id, question, answer, createdAt }) {
   const navigate = useNavigate();
-  const auth = useSelector((state) => state.auth.auth);
+  const { auth } = useAuthStore();
   const queryClient = useQueryClient();
 
   const [opened, setOpened] = useState(false);

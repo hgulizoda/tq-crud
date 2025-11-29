@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const API = axios.create({
+export const API = axios.create({
   baseURL: "https://faq-crud.onrender.com/api/",
 });
 
-export default API;
+export const LOGIN_API = axios.create({
+  baseURL: "https://dummyjson.com/",
+});
